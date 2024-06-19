@@ -1,0 +1,51 @@
+<opencv2/opencv.hpp>
+#include <thread>
+#include <iostream>
+
+class VideoCaptureWrapper 
+{
+public:
+    VideoCaptureWrapper() : cap(0, cv::CAP_V4L2)
+    {
+        if (!cap.isOpened())  std::exit(0);
+    }
+
+    void start() 
+    {
+        thread = std::thread([this] { this->captureLoop();  });
+    }
+
+    ~VideoCaptureWrapper() 
+    {
+        thread.join();
+        cap.release();
+        cv::destroyAllWindows();
+    }
+
+private:
+    cv::VideoCapture cap;
+    cv::Mat frame;
+    std::thread thread;
+
+    void captureLoop() 
+    {
+        while (1) 
+        {
+            cap.read(frame);
+
+            if (frame.empty())              std::exit(0);
+
+            cv::imshow("Live", frame);
+
+            int key = cv::waitKey(1);
+
+            if (key == 'q' || key == 'Q')   break;
+        }
+    }
+};
+
+int main() {
+    VideoCaptureWrapper wrapper;
+    wrapper.start();
+    return EXIT_SUCCESS;
+}

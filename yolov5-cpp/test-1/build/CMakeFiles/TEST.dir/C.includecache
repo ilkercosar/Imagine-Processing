@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hedef-ubuntu/cpp/test-1/sound.c
+stdio.h
+-
+stdlib.h
+-
+pthread.h
+-
+sound.h
+/home/hedef-ubuntu/cpp/test-1/sound.h
+
+/home/hedef-ubuntu/cpp/test-1/sound.h
+alsa/asoundlib.h
+-
+
