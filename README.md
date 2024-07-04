@@ -1,4 +1,2 @@
-# Imagine-Processing
-- Detect red color
-- Teeth replacement
-- Object detection
+# Future Image Processing
+- Colour temperature estimation 
